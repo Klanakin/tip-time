@@ -6,11 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
+<<<<<<< HEAD
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+=======
+import androidx.compose.runtime.*
+>>>>>>> reinforced
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -43,6 +47,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     TipTimeTheme {
+<<<<<<< HEAD
+=======
+        // A surface container using the 'background' color from the theme
+>>>>>>> reinforced
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
@@ -52,6 +60,7 @@ fun DefaultPreview() {
     }
 }
 
+<<<<<<< HEAD
 @Composable
 fun TipTimeScreen() {
     var amountInput by remember { mutableStateOf("0") }
@@ -61,6 +70,19 @@ fun TipTimeScreen() {
     Column(
         modifier = Modifier.padding(32.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
+=======
+@Suppress("OPT_IN_IS_NOT_ENABLED")
+@Composable
+fun TipTimeScreen() {
+    var amountInput by remember { mutableStateOf("0") }
+    val billingAmount = amountInput.toDoubleOrNull() ?: 0.0
+    val tip = calcTip(billingAmount)
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier
+            .padding(32.dp)
+>>>>>>> reinforced
     ) {
         Text(
             text = stringResource(id = R.string.calculate_tip),
@@ -72,7 +94,11 @@ fun TipTimeScreen() {
             value = amountInput,
             onValueChange = { amountInput = it }
         )
+<<<<<<< HEAD
         Spacer(Modifier.height(24.dp))
+=======
+        Spacer(modifier = Modifier.height(24.dp))
+>>>>>>> reinforced
         Text(
             text = stringResource(R.string.tip_amount, tip),
             modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -81,14 +107,22 @@ fun TipTimeScreen() {
         )
     }
 }
+<<<<<<< HEAD
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditNumberField(
+=======
+@Suppress("OPT_IN_IS_NOT_ENABLED")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun EditNumberField(
+>>>>>>> reinforced
     value: String,
     onValueChange: (String) -> Unit
 ) {
     TextField(
+<<<<<<< HEAD
         modifier = Modifier.fillMaxWidth(),
         value = value,
         onValueChange = onValueChange,
@@ -102,3 +136,21 @@ private fun calculateTip(amount: Double, tipPercent: Double = 15.0): String {
     val tip = tipPercent/100 * amount
     return NumberFormat.getCurrencyInstance().format(tip)
 }
+=======
+        value = value,
+        onValueChange = onValueChange,
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        label = { Text(text = stringResource(id = R.string.cost_of_service)) },
+        modifier = Modifier.fillMaxWidth()
+    )
+}
+
+private fun calcTip(
+    billingAmount: Double,
+    tipPercent: Double = 15.0
+): String {
+    val tip: Double = tipPercent/100 * billingAmount
+    return NumberFormat.getCurrencyInstance().format(tip)
+}
+>>>>>>> reinforced
